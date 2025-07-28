@@ -72,7 +72,6 @@ sql-assistant/
 ### 安装依赖
 
 #### 方法一：使用pip直接安装
-
 ```bash
 # 核心依赖
 pip install streamlit>=1.28.0
@@ -98,9 +97,7 @@ pip install flake8>=6.0.0
 ```
 
 #### 方法二：创建requirements.txt文件
-
 创建 `requirements.txt` 文件并添加以下内容：
-
 ```txt
 # Web框架
 streamlit>=1.28.0
@@ -128,13 +125,11 @@ flake8>=6.0.0
 ```
 
 然后执行：
-
 ```bash
 pip install -r requirements.txt
 ```
 
 #### 方法三：使用虚拟环境（推荐）
-
 ```bash
 # 创建虚拟环境
 python -m venv sql-assistant-env
@@ -151,29 +146,27 @@ pip install -r requirements.txt
 
 #### 依赖说明
 
-| 依赖包                   | 版本要求 | 用途说明                       |
-| ------------------------ | -------- | ------------------------------ |
-| `streamlit`              | >=1.28.0 | Web界面框架，提供响应式UI组件  |
-| `langchain`              | >=0.1.0  | LLM应用开发框架，核心抽象层    |
-| `langchain-community`    | >=0.0.20 | LangChain社区扩展，数据库集成  |
-| `langchain-ollama`       | >=0.1.0  | Ollama模型集成适配器           |
-| `mysql-connector-python` | >=8.0.0  | MySQL数据库连接驱动            |
-| `SQLAlchemy`             | >=2.0.0  | SQL工具包和ORM框架             |
-| `pandas`                 | >=2.0.0  | 数据分析和处理库               |
-| `numpy`                  | >=1.24.0 | 数值计算基础库                 |
-| `requests`               | >=2.28.0 | HTTP请求库，用于Ollama API调用 |
+| 依赖包 | 版本要求 | 用途说明 |
+|--------|----------|----------|
+| `streamlit` | >=1.28.0 | Web界面框架，提供响应式UI组件 |
+| `langchain` | >=0.1.0 | LLM应用开发框架，核心抽象层 |
+| `langchain-community` | >=0.0.20 | LangChain社区扩展，数据库集成 |
+| `langchain-ollama` | >=0.1.0 | Ollama模型集成适配器 |
+| `mysql-connector-python` | >=8.0.0 | MySQL数据库连接驱动 |
+| `SQLAlchemy` | >=2.0.0 | SQL工具包和ORM框架 |
+| `pandas` | >=2.0.0 | 数据分析和处理库 |
+| `numpy` | >=1.24.0 | 数值计算基础库 |
+| `requests` | >=2.28.0 | HTTP请求库，用于Ollama API调用 |
 
 ### 配置设置
 
 1. **配置Ollama服务**
-
    ```python
    # 在 config.py 中修改Ollama配置
    OLLAMA_BASE_URL = "http://localhost:11434"  # 修改为您的Ollama服务地址
    ```
 
 2. **配置数据库连接**
-
    ```python
    # 在 config.py 中修改数据库配置
    DATABASE_CONFIG = {
@@ -185,7 +178,6 @@ pip install -r requirements.txt
    ```
 
 3. **下载推荐模型**
-
    ```bash
    # 下载SQL专用模型（推荐）
    ollama pull sqlcoder:15b
@@ -254,14 +246,12 @@ streamlit run app.py
 ### 支持的模型
 
 #### SQL专用模型（推荐）
-
 - `sqlcoder:15b` - 15B参数的SQL专用模型
 - `sqlcoder:7b` - 7B参数的SQLCoder
 - `mannix/defog-llama3-sqlcoder-8b:latest` - 基于Llama3的SQL编码器
 - `duckdb-nsql:7b` - DuckDB自然语言到SQL模型
 
 #### 通用大语言模型
-
 - **Qwen系列**: qwen2.5:72b, qwen2.5:32b, qwen2.5:14b, qwen2.5:7b
 - **DeepSeek系列**: deepseek-r1:14b, deepseek-r1:7b
 - **QwQ系列**: QwQ:latest, QwQ:32b
@@ -294,7 +284,6 @@ streamlit run app.py
 ### 前端实现 (Frontend Implementation)
 
 #### 🎨 Streamlit框架选择
-
 - **技术选型**: Streamlit - Python原生Web应用框架
 - **选择原因**: 
   - 快速开发：无需前后端分离，Python一站式开发
@@ -303,7 +292,6 @@ streamlit run app.py
   - 组件丰富：内置表单、图表、侧边栏等UI组件
 
 #### 🖥️ 界面架构设计
-
 ```python
 # app.py 主要结构
 def main():
@@ -328,7 +316,6 @@ def main():
 ```
 
 #### 🎯 核心UI组件
-
 1. **模型选择器**: 动态加载可用模型，分类展示
 2. **连接状态指示器**: 实时检测数据库和LLM连接状态
 3. **Schema可视化器**: 表格展示数据库结构，支持折叠展开
@@ -340,7 +327,6 @@ def main():
 #### 🔧 核心模块架构
 
 ##### 1. 查询引擎 (Query Engine)
-
 ```python
 class QueryEngine:
     def __init__(self):
@@ -362,7 +348,6 @@ class QueryEngine:
 ```
 
 ##### 2. LLM管理器 (LLM Manager)
-
 ```python
 class LLMManager:
     def __init__(self):
@@ -383,7 +368,6 @@ class LLMManager:
 ```
 
 ##### 3. 数据库管理器 (Database Manager)
-
 ```python
 class DatabaseManager:
     def __init__(self):
@@ -406,7 +390,6 @@ class DatabaseManager:
 ```
 
 #### 🔄 模块间通信机制
-
 - **全局实例模式**: 各管理器采用单例模式，确保状态一致性
 - **事件驱动**: Streamlit的响应式更新机制
 - **错误传播**: 统一的错误处理和状态反馈机制
@@ -414,7 +397,6 @@ class DatabaseManager:
 ### 🧠 自然语言转SQL详细流程
 
 #### 完整转换流程图
-
 ```
 用户输入自然语言查询
          ↓
@@ -448,7 +430,6 @@ class DatabaseManager:
 ```
 
 #### 🎯 Step 1: 查询预处理
-
 ```python
 def preprocess_query(self, user_input):
     """查询预处理"""
@@ -467,7 +448,6 @@ def preprocess_query(self, user_input):
 ```
 
 #### 🎯 Step 2: 模型选择策略
-
 ```python
 def select_generation_strategy(self, model_name):
     """根据模型类型选择生成策略"""
@@ -480,7 +460,6 @@ def select_generation_strategy(self, model_name):
 ```
 
 #### 🎯 Step 3: SQLCoder专用路径
-
 ```python
 def sqlcoder_generation_path(self, query, schema_info):
     """SQLCoder专用生成路径"""
@@ -514,7 +493,6 @@ def sqlcoder_generation_path(self, query, schema_info):
 ```
 
 #### 🎯 Step 4: 通用LLM路径
-
 ```python
 def general_llm_generation_path(self, query, schema_info):
     """通用LLM生成路径"""
@@ -547,7 +525,6 @@ def general_llm_generation_path(self, query, schema_info):
 ```
 
 #### 🎯 Step 5: SQL后处理和清理
-
 ```python
 def post_process_sql(self, raw_sql_response):
     """SQL后处理流程"""
@@ -574,7 +551,6 @@ def post_process_sql(self, raw_sql_response):
 ```
 
 #### 🎯 Step 6: 执行和结果处理
-
 ```python
 def execute_and_format_result(self, sql):
     """执行SQL并格式化结果"""
@@ -606,7 +582,6 @@ def execute_and_format_result(self, sql):
 ### 🔧 关键技术实现细节
 
 #### 1. Schema动态转换
-
 ```python
 def convert_schema_for_llm(self, table_columns):
     """将配置中的表结构转换为LLM可理解的格式"""
@@ -623,7 +598,6 @@ def convert_schema_for_llm(self, table_columns):
 ```
 
 #### 2. 提示词工程优化
-
 ```python
 def build_optimized_prompt(self, query, schema, examples):
     """构建优化的提示词"""
@@ -650,7 +624,6 @@ SQL:
 ```
 
 #### 3. 错误处理和重试机制
-
 ```python
 def robust_sql_generation(self, query, max_retries=3):
     """带重试机制的SQL生成"""
@@ -671,19 +644,16 @@ def robust_sql_generation(self, query, max_retries=3):
 ### 🚀 性能优化策略
 
 #### 1. 连接池管理
-
 - 数据库连接采用懒加载模式
 - LLM模型实例复用，避免重复初始化
 - 缓存常用查询结果
 
 #### 2. 查询优化
-
 - 自动添加LIMIT限制，防止大结果集
 - SQL语句缓存，相同查询直接返回
 - 异步执行长时间查询
 
 #### 3. 内存管理
-
 - 及时清理大型查询结果
 - 使用生成器处理大数据集
 - 限制并发查询数量
@@ -691,7 +661,6 @@ def robust_sql_generation(self, query, max_retries=3):
 ### 🔍 核心算法实现
 
 #### 1. SQL语句清理算法
-
 ```python
 class SQLProcessor:
     def clean_sql(self, sql_text):
@@ -717,7 +686,6 @@ class SQLProcessor:
 ```
 
 #### 2. 智能表名列名校正
-
 ```python
 class SQLPostProcessor:
     def correct_table_column_names(self, sql, table_columns):
@@ -751,7 +719,6 @@ class SQLPostProcessor:
 ```
 
 #### 3. 动态提示词构建
-
 ```python
 class PromptBuilder:
     def build_context_aware_prompt(self, query, schema, model_type):
@@ -795,7 +762,6 @@ class PromptBuilder:
 ### 🛡️ 安全性实现
 
 #### 1. SQL注入防护
-
 ```python
 class SecurityValidator:
     DANGEROUS_KEYWORDS = [
@@ -824,7 +790,6 @@ class SecurityValidator:
 ```
 
 #### 2. 查询结果限制
-
 ```python
 class QueryLimiter:
     def apply_safety_limits(self, sql):
@@ -846,7 +811,6 @@ class QueryLimiter:
 ### 📊 监控和日志
 
 #### 1. 性能监控
-
 ```python
 class PerformanceMonitor:
     def __init__(self):
@@ -881,7 +845,6 @@ class PerformanceMonitor:
 ```
 
 #### 2. 智能日志记录
-
 ```python
 class SmartLogger:
     def log_query_generation(self, query, sql, model, success):
@@ -911,7 +874,6 @@ class SmartLogger:
 ### 🔧 扩展性设计
 
 #### 1. 插件化模型支持
-
 ```python
 class ModelRegistry:
     def __init__(self):
@@ -934,7 +896,6 @@ model_registry.register_model("custom_sql_model", CustomSQLAdapter)
 ```
 
 #### 2. 数据库适配器模式
-
 ```python
 class DatabaseAdapter:
     """数据库适配器基类"""
@@ -962,28 +923,24 @@ class PostgreSQLAdapter(DatabaseAdapter):
 ### 🎯 最佳实践总结
 
 #### 1. 代码组织原则
-
 - **单一职责**: 每个模块只负责一个核心功能
 - **依赖注入**: 通过构造函数注入依赖，便于测试
 - **配置外置**: 所有配置集中在config.py中管理
 - **错误处理**: 统一的异常处理和错误传播机制
 
 #### 2. 性能优化原则
-
 - **懒加载**: 数据库连接和模型实例按需创建
 - **缓存策略**: 缓存常用查询和Schema信息
 - **资源管理**: 及时释放大型对象和连接
 - **异步处理**: 长时间操作使用异步模式
 
 #### 3. 安全性原则
-
 - **输入验证**: 所有用户输入都进行安全检查
 - **权限控制**: 数据库用户使用最小权限原则
 - **SQL限制**: 自动添加查询限制，防止资源耗尽
 - **日志审计**: 记录所有重要操作和异常
 
 #### 4. 可维护性原则
-
 - **模块化设计**: 清晰的模块边界和接口定义
 - **文档完整**: 每个函数都有详细的文档说明
 - **测试覆盖**: 核心功能都有对应的单元测试
@@ -1004,7 +961,6 @@ class PostgreSQLAdapter(DatabaseAdapter):
 ## 🎨 界面预览
 
 ### 主界面功能
-
 - 🤖 **模型配置区**: 选择和配置LLM模型
 - 🔗 **连接状态**: 实时显示数据库和模型连接状态
 - 📊 **Schema展示**: 可视化数据库表结构
@@ -1012,7 +968,6 @@ class PostgreSQLAdapter(DatabaseAdapter):
 - 📋 **结果展示**: 格式化的查询结果显示
 
 ### Schema可视化特性
-
 - 📋 **分表显示**: 每个表独立的可展开区域
 - 🔍 **单表选择**: 下拉选择特定表查看详情
 - 📈 **统计信息**: 列数、数据类型、ID字段统计
@@ -1021,7 +976,6 @@ class PostgreSQLAdapter(DatabaseAdapter):
 ## 🔧 配置说明
 
 ### 模型配置
-
 ```python
 # 推荐的SQL查询模型（按优先级排序）
 RECOMMENDED_SQL_MODELS = [
@@ -1034,7 +988,6 @@ RECOMMENDED_SQL_MODELS = [
 ```
 
 ### 数据库配置
-
 ```python
 DATABASE_CONFIG = {
     "host": "localhost",
@@ -1045,7 +998,6 @@ DATABASE_CONFIG = {
 ```
 
 ### 应用配置
-
 ```python
 APP_CONFIG = {
     "title": "🤖智能SQL查询助手🤖",
@@ -1125,7 +1077,6 @@ python test_sqlcoder.py
 ## 📝 更新日志
 
 ### v1.0.0 (当前版本)
-
 - ✅ 完整的SQL智能助手功能
 - ✅ 多模型支持（SQL专用 + 通用模型）
 - ✅ 数据库Schema可视化
@@ -1138,7 +1089,6 @@ python test_sqlcoder.py
 ### 本地开发部署
 
 #### 1. 开发环境设置
-
 ```bash
 # 克隆项目
 git clone <repository-url>
@@ -1158,9 +1108,7 @@ streamlit run app.py
 ```
 
 #### 2. 环境变量配置
-
 创建 `.env` 文件：
-
 ```env
 # 数据库配置
 DB_HOST=localhost
@@ -1180,9 +1128,7 @@ APP_LOG_LEVEL=INFO
 ### 生产环境部署
 
 #### 1. Docker部署
-
 创建 `Dockerfile`：
-
 ```dockerfile
 FROM python:3.11-slim
 
@@ -1208,7 +1154,6 @@ CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0
 ```
 
 创建 `docker-compose.yml`：
-
 ```yaml
 version: '3.8'
 
@@ -1252,7 +1197,6 @@ volumes:
 ```
 
 #### 2. 云服务器部署
-
 ```bash
 # 在云服务器上
 sudo apt update
@@ -1274,7 +1218,6 @@ sudo nano /etc/nginx/sites-available/sql-assistant
 ```
 
 Nginx配置示例：
-
 ```nginx
 server {
     listen 80;
@@ -1301,13 +1244,11 @@ server {
 #### 1. 连接问题
 
 **问题**: Ollama连接失败
-
 ```
 ConnectionError: Cannot connect to Ollama service
 ```
 
 **解决方案**:
-
 ```bash
 # 检查Ollama服务状态
 ollama list
@@ -1323,13 +1264,11 @@ OLLAMA_BASE_URL = "http://localhost:11434"
 ```
 
 **问题**: 数据库连接失败
-
 ```
 mysql.connector.errors.DatabaseError: 2003 (HY000): Can't connect to MySQL server
 ```
 
 **解决方案**:
-
 ```bash
 # 检查MySQL服务状态
 sudo systemctl status mysql
@@ -1347,13 +1286,11 @@ mysql -u your_username -p -e "SELECT USER(), DATABASE();"
 #### 2. 模型问题
 
 **问题**: SQLCoder模型不可用
-
 ```
 Model 'sqlcoder:15b' not found
 ```
 
 **解决方案**:
-
 ```bash
 # 下载SQLCoder模型
 ollama pull sqlcoder:15b
@@ -1367,13 +1304,11 @@ ollama run sqlcoder:7b "SELECT * FROM users LIMIT 5;"
 ```
 
 **问题**: 模型响应慢或超时
-
 ```
 TimeoutError: Model response timeout
 ```
 
 **解决方案**:
-
 ```python
 # 在config.py中调整超时设置
 OLLAMA_CONFIG = {
@@ -1392,13 +1327,11 @@ RECOMMENDED_SQL_MODELS = [
 #### 3. 性能问题
 
 **问题**: 查询响应慢
-
 ```
 Query execution time > 30 seconds
 ```
 
 **解决方案**:
-
 ```python
 # 优化数据库查询
 # 1. 添加索引
@@ -1414,13 +1347,11 @@ CACHE_TTL = 300  # 5分钟缓存
 ```
 
 **问题**: 内存使用过高
-
 ```
 MemoryError: Unable to allocate memory
 ```
 
 **解决方案**:
-
 ```python
 # 在config.py中限制资源使用
 MAX_RESULT_ROWS = 1000
@@ -1435,13 +1366,11 @@ gc.collect()
 #### 4. 界面问题
 
 **问题**: Streamlit页面无法加载
-
 ```
 StreamlitAPIException: Streamlit server error
 ```
 
 **解决方案**:
-
 ```bash
 # 清除Streamlit缓存
 streamlit cache clear
@@ -1455,13 +1384,11 @@ lsof -i :8501
 ```
 
 **问题**: 页面样式异常
-
 ```
 CSS styles not loading properly
 ```
 
 **解决方案**:
-
 ```python
 # 在app.py中强制刷新样式
 st.markdown("""
@@ -1480,7 +1407,6 @@ st.markdown("""
 ### 调试技巧
 
 #### 1. 启用详细日志
-
 ```python
 import logging
 
@@ -1498,7 +1424,6 @@ logger = logging.getLogger(__name__)
 ```
 
 #### 2. 性能分析
-
 ```python
 import time
 import functools
@@ -1521,7 +1446,6 @@ def generate_sql(query):
 ```
 
 #### 3. 错误追踪
-
 ```python
 import traceback
 
